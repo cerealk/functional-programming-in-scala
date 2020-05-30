@@ -94,4 +94,10 @@ object ListTest extends SimpleTestSuite {
     assertEquals(foldRightFL(List(1,2,3,4), Nil:List[Int])(Cons(_,_)),List(1,2,3,4) )
   }
 
+  test("append") {
+    assertEquals(append(List(1,2), List(3,4)), List(1,2,3,4))
+    assertEquals(appendFL(List(1,2), List(3,4)), List(1,2,3,4))
+  }
+
+
 }

@@ -95,5 +95,12 @@ object List {
     foldLeft(l, Nil:List[A])((acc,e) => Cons(e, acc))
   }
 
+  def append[A](l1:List[A], l2:List[A]):List[A] = {
+    foldRight(l1, l2)(Cons(_,_))
+  }
+
+  def appendFL[A](l1:List[A], l2:List[A]):List[A] = {
+    foldLeft(reverse(l1), l2)((a,b) =>Cons(b,a))
+  }
 
 }
