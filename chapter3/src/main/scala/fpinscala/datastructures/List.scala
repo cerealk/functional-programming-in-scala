@@ -103,4 +103,8 @@ object List {
     foldLeft(reverse(l1), l2)((a,b) =>Cons(b,a))
   }
 
+  def concatenate[A](l:List[List[A]]): List[A] =
+
+    foldRight(l, Nil:List[A]) (append)
+
 }

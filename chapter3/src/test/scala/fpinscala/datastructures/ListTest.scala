@@ -99,5 +99,13 @@ object ListTest extends SimpleTestSuite {
     assertEquals(appendFL(List(1,2), List(3,4)), List(1,2,3,4))
   }
 
+  test("concatenate a list of lists") {
+    val l1 = List(1,2,3)
+    val l2 = List(4,5)
+    val l3 = List(6,7)
+    assertEquals(concatenate(List(l1,l2,l3)), List(1,2,3,4,5,6,7))
+  }
+
+
 
 }
