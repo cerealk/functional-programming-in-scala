@@ -23,19 +23,14 @@ object List {
   }
 
 
-  def apply[A](as: A*): List[A] = {
-    if (as.isEmpty) Nil
-    else Cons(as.head, apply(as.tail: _*))
-  }
+  def apply[A](as: A*): List[A] = if (as.isEmpty) Nil else Cons(as.head, apply(as.tail: _*))
 
   def tail[A](as: List[A]): List[A] = as match {
     case Nil => throw new IllegalArgumentException("can't tail an empty list")
     case Cons(x, xs) => xs
   }
 
-  def setHead[A](a: A, as: List[A]): List[A] = {
-    Cons(a, as)
-  }
+  def setHead[A](a: A, as: List[A]): List[A] = Cons(a, as)
 
   def drop[A](l: List[A], n: Int): List[A] = n match {
     case 0 => l
@@ -71,40 +66,23 @@ object List {
     case Cons(x,xs) => foldLeft(xs, f(z,x)) (f)
   }
 
-  def sumFoldRight(l:List[Int]): Int = {
-    foldRight(l, 0)(_+_)
-  }
+  def sumFoldRight(l:List[Int]): Int = foldRight(l, 0)(_+_)
 
-  def sumFoldLeft(l:List[Int]): Int = {
-    foldLeft(l, 0)(_+_)
-  }
+  def sumFoldLeft(l:List[Int]): Int = foldLeft(l, 0)(_+_)
 
-  def productFoldRight(l:List[Double]): Double ={
-    foldRight(l, 1.0)(_*_)
-  }
+  def productFoldRight(l:List[Double]): Double = foldRight(l, 1.0)(_*_)
 
-  def productFoldLeft(l:List[Double]): Double ={
-    foldLeft(l, 1.0)(_*_)
-  }
+  def productFoldLeft(l:List[Double]): Double = foldLeft(l, 1.0)(_*_)
 
-  def length[A](l: List[A]): Int = {
-    foldRight(l, 0)((_, acc) => acc + 1)
-  }
+  def length[A](l: List[A]): Int = foldRight(l, 0)((_, acc) => acc + 1)
 
-  def reverse[A](l:List[A]): List[A] = {
-    foldLeft(l, Nil:List[A])((acc,e) => Cons(e, acc))
-  }
+  def reverse[A](l:List[A]): List[A] = foldLeft(l, Nil:List[A])((acc, e) => Cons(e, acc))
 
-  def append[A](l1:List[A], l2:List[A]):List[A] = {
-    foldRight(l1, l2)(Cons(_,_))
-  }
+  def append[A](l1:List[A], l2:List[A]):List[A] = foldRight(l1, l2)(Cons(_,_))
 
-  def appendFL[A](l1:List[A], l2:List[A]):List[A] = {
-    foldLeft(reverse(l1), l2)((a,b) =>Cons(b,a))
-  }
+  def appendFL[A](l1:List[A], l2:List[A]):List[A] = foldLeft(reverse(l1), l2)((a, b) =>Cons(b,a))
 
   def concatenate[A](l:List[List[A]]): List[A] =
-
     foldRight(l, Nil:List[A]) (append)
 
 }
