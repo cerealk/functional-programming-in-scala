@@ -85,6 +85,6 @@ object List {
   def concatenate[A](l:List[List[A]]): List[A] =
     foldRight(l, Nil:List[A]) (append)
 
-
+  def map[A,B](l:List[A]) (f:A=>B): List[B] = foldRight(l, Nil:List[B])((e,acc) => Cons(f(e), acc))
 
 }

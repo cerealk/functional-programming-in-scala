@@ -118,4 +118,24 @@ object ListTest extends SimpleTestSuite {
     assertEquals(add1(l), List(2,3,4,5,6))
   }
 
+
+  test("double to string") {
+    val l = List(1.0,2.0,3.0)
+
+    def toString(ds:List[Double]):List[String] = ds match {
+      case Nil => Nil
+      case Cons(x, xs) => Cons(x.toString, toString(xs))
+    }
+
+    assertEquals(toString(l), List("1.0", "2.0", "3.0"))
+  }
+
+  test("map") {
+    val l = List(1, 2, 3, 4, 5)
+
+    def add1(list: List[Int]): List[Int] = map(list)(_ + 1)
+
+    assertEquals(add1(l), List(2,3,4,5,6))
+  }
+
 }
