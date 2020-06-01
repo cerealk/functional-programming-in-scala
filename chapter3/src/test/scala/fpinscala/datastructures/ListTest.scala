@@ -29,38 +29,39 @@ object ListTest extends SimpleTestSuite {
   test("Tail an empty List") {
     val as = List()
     intercept[Exception] {
-      tail(as); ()
+      tail(as);
+      ()
     }
     ()
   }
 
-  test("setHead"){
+  test("setHead") {
     assertEquals(setHead(1, List()), List(1))
   }
 
   test("Drop") {
-    assertEquals(drop(List(1,2,3),2), List(3))
-    assertEquals(drop(List(),1), Nil)
-    assertEquals(drop(List(1,2,3), 0 ), List(1,2,3))
+    assertEquals(drop(List(1, 2, 3), 2), List(3))
+    assertEquals(drop(List(), 1), Nil)
+    assertEquals(drop(List(1, 2, 3), 0), List(1, 2, 3))
   }
 
 
-  test("dropWhile"){
-    assertEquals(dropWhile(List(1,2,3))((s:Int)=> s < 2), List(2,3))
-    assertEquals(dropWhile(List(2,3,4))((s:Int)=> s < 2), List(2,3,4))
-    assertEquals(dropWhile(List(1))((s:Int)=> s < 2), List())
+  test("dropWhile") {
+    assertEquals(dropWhile(List(1, 2, 3))((s: Int) => s < 2), List(2, 3))
+    assertEquals(dropWhile(List(2, 3, 4))((s: Int) => s < 2), List(2, 3, 4))
+    assertEquals(dropWhile(List(1))((s: Int) => s < 2), List())
   }
 
   test("init") {
-    assertEquals(init(List(1,2,3,4)), List(1,2,3))
+    assertEquals(init(List(1, 2, 3, 4)), List(1, 2, 3))
   }
 
-  test("foldRight with Nil and Cons"){
-    assertEquals(foldRight(List(1,2,3,4), Nil:List[Int])(Cons(_,_)),List(1,2,3,4) )
+  test("foldRight with Nil and Cons") {
+    assertEquals(foldRight(List(1, 2, 3, 4), Nil: List[Int])(Cons(_, _)), List(1, 2, 3, 4))
   }
 
-  test("length of a list"){
-    assertEquals(length(List(1,2,3,4)), 4)
+  test("length of a list") {
+    assertEquals(length(List(1, 2, 3, 4)), 4)
   }
 
   test("sum in term of foldRight") {
@@ -82,30 +83,39 @@ object ListTest extends SimpleTestSuite {
   }
 
 
-  test("Reverse list"){
-    assertEquals(reverse(List(1,2,3,4)), List(4,3,2,1))
+  test("Reverse list") {
+    assertEquals(reverse(List(1, 2, 3, 4)), List(4, 3, 2, 1))
   }
 
-  test("foldLeft with Nil and Cons"){
-    assertEquals(foldLeft(List(1,2,3,4), Nil:List[Int])((acc,i)=>Cons(i,acc)),List(4,3,2,1) )
+  test("foldLeft with Nil and Cons") {
+    assertEquals(foldLeft(List(1, 2, 3, 4), Nil: List[Int])((acc, i) => Cons(i, acc)), List(4, 3, 2, 1))
   }
 
-  test("fold Right In terms of fold left"){
-    assertEquals(foldRightFL(List(1,2,3,4), Nil:List[Int])(Cons(_,_)),List(1,2,3,4) )
+  test("fold Right In terms of fold left") {
+    assertEquals(foldRightFL(List(1, 2, 3, 4), Nil: List[Int])(Cons(_, _)), List(1, 2, 3, 4))
   }
 
   test("append") {
-    assertEquals(append(List(1,2), List(3,4)), List(1,2,3,4))
-    assertEquals(appendFL(List(1,2), List(3,4)), List(1,2,3,4))
+    assertEquals(append(List(1, 2), List(3, 4)), List(1, 2, 3, 4))
+    assertEquals(appendFL(List(1, 2), List(3, 4)), List(1, 2, 3, 4))
   }
 
   test("concatenate a list of lists") {
-    val l1 = List(1,2,3)
-    val l2 = List(4,5)
-    val l3 = List(6,7)
-    assertEquals(concatenate(List(l1,l2,l3)), List(1,2,3,4,5,6,7))
+    val l1 = List(1, 2, 3)
+    val l2 = List(4, 5)
+    val l3 = List(6, 7)
+    assertEquals(concatenate(List(l1, l2, l3)), List(1, 2, 3, 4, 5, 6, 7))
   }
 
+  test("add 1 to a list of integers") {
+    val l = List(1, 2, 3, 4, 5)
 
+    def add1(list: List[Int]): List[Int] = list match {
+      case Nil => Nil
+      case Cons(x, xs) => Cons(x + 1, add1(xs))
+    }
+
+    assertEquals(add1(l), List(2,3,4,5,6))
+  }
 
 }
