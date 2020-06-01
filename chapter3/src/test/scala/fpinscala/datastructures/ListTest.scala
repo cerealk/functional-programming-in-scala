@@ -138,4 +138,12 @@ object ListTest extends SimpleTestSuite {
     assertEquals(add1(l), List(2,3,4,5,6))
   }
 
+  test("filter odd numbers") {
+
+    val l = List(1,2,3,4,5,6)
+
+    assertEquals(filter(l)(e=> e % 2 == 0 ), List(2,4,6))
+
+  }
+
 }
