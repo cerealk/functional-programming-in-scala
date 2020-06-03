@@ -90,4 +90,8 @@ object List {
   def filter[A](l:List[A])(f:A=>Boolean):List[A] =
     foldRight(l, Nil:List[A])((a,acc) => if(f(a)) Cons(a, acc) else acc)
 
+  def flatMap[A,B](l:List[A])(f:A=>List[B]): List[B]={
+    foldRight(l, Nil:List[B])((a,acc)=> append(f(a),acc))
+  }
+
 }

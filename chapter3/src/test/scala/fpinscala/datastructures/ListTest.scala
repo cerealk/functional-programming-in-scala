@@ -140,10 +140,20 @@ object ListTest extends SimpleTestSuite {
 
   test("filter odd numbers") {
 
+
     val l = List(1,2,3,4,5,6)
 
     assertEquals(filter(l)(e=> e % 2 == 0 ), List(2,4,6))
 
+  }
+
+  test("flatMap"){
+    val l1 = List(1, 2, 3)
+    val l2 = List(4, 5)
+    val l3 = List(6, 7)
+    val value = flatMap(List(l1, l2, l3))(a => map(a)(n =>String.valueOf(n)))
+    println(value)
+    assertEquals(value, List("1","2","3", "4","5", "6", "7"))
   }
 
 }
