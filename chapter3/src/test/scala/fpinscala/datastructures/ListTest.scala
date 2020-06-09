@@ -156,4 +156,32 @@ object ListTest extends SimpleTestSuite {
     assertEquals(value, List("1","2","3", "4","5", "6", "7"))
   }
 
+  test("filter with flatMap") {
+    val l = List(1,2,3,4,5,6)
+    assertEquals(filterFM(l)(e=> e % 2 == 0 ), List(2,4,6))
+  }
+
+  test("sum list pairwise") {
+    val l1 = List(1,2,3)
+    val l2 = List(4,5,6)
+
+    def sumPairwise(l1:List[Int], l2: List[Int]): List[Int] = (l1,l2) match {
+      case (Cons(x,xs), Cons(y, ys)) => Cons(x + y, sumPairwise(xs,ys))
+      case _ => Nil
+    }
+
+    assertEquals(sumPairwise(l1, l2), List(5,7,9))
+
+  }
+
+  test("sum list pairwise using zipWith") {
+    val l1 = List(1,2,3)
+    val l2 = List(4,5,6)
+
+    def sumPairwise(l1:List[Int], l2: List[Int]): List[Int] = zipWith(l1,l2)(_+_)
+
+    assertEquals(sumPairwise(l1, l2), List(5,7,9))
+
+  }
+
 }

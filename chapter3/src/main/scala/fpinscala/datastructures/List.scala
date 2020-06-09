@@ -91,9 +91,14 @@ object List {
     foldRight(l, Nil:List[A])((a,acc) => if(f(a)) Cons(a, acc) else acc)
 
   def flatMap[A,B](l:List[A])(f:A=>List[B]): List[B]={
-//    foldRight(l, Nil:List[B])((a,acc)=> append(f(a),acc))
     concatenate(map(l)(f))
   }
 
+  def filterFM[A](l:List[A])(f:A=>Boolean):List[A] = flatMap(l)(a => if (f(a)) List(a) else Nil)
+
+  def zipWith[A,B,C](l1: List[A], l2:List[B])(f: (A,B) => C): List[C] = (l1,l2) match {
+    case (Cons(x,xs), Cons(y,ys)) => Cons(f(x,y), zipWith(xs,ys)(f))
+    case _ => Nil
+  }
 
 }
