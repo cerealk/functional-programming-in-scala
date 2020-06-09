@@ -184,4 +184,17 @@ object ListTest extends SimpleTestSuite {
 
   }
 
+  test("startsWith") {
+    assertEquals(startsWith(List(1,2,3,4,5,6), List(1,2,3)),true)
+    assertEquals(startsWith(List(1,2,3,4,5,6), List(2,3)),false)
+  }
+
+  test("subSequence"){
+
+    def l = List(1, 2, 3, 4, 5)
+    assertEquals(hasSubsequence(l, List(2, 3)),true)
+    assertEquals(hasSubsequence(l, List(0, 1)),false)
+    assertEquals(hasSubsequence(l, Nil),true)
+  }
+
 }
