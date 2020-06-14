@@ -27,6 +27,12 @@ lazy val chapter3 = project
     settings
   )
 
+lazy val chapter4 = project
+  .settings(
+    name := "chapter4",
+    settings
+  )
+
 lazy val settings = Seq(
   organization := "org.xaos",
   scalaVersion := "2.13.2",
